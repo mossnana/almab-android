@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "803492217648",
+    "firebase_url": "https://almab-f6333.firebaseio.com",
+    "project_id": "almab-f6333",
+    "storage_bucket": "almab-f6333.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803492217648:android:69f58fc25b905338",
+        "android_client_info": {
+          "package_name": "com.mossnana.loginactivity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "803492217648-ug9vmbdd9tcbq36b2rifcant3gt1hldv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mossnana.loginactivity",
+            "certificate_hash": "4ad96d9be172c047f7651c56a3043f4f49ca4fa4"
+          }
+        },
+        {
+          "client_id": "803492217648-lt2n83fm17tllopfsme2ts44oqtireic.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3CfFx-RjDmVJ8ZV_XxC2-gMtgioS-kYs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "803492217648-lt2n83fm17tllopfsme2ts44oqtireic.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
