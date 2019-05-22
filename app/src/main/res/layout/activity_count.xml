@@ -35,7 +35,7 @@
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:layout_weight="1">
+                android:layout_height="match_parent" android:layout_weight="1" android:background="#E91E63">
             <TextView
                     android:text="Red Team"
                     android:layout_width="match_parent"
@@ -51,7 +51,7 @@
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:layout_weight="1">
+                android:layout_height="match_parent" android:layout_weight="1" android:background="#2196F3">
             <TextView
                     android:text="Blue Team"
                     android:layout_width="match_parent"
