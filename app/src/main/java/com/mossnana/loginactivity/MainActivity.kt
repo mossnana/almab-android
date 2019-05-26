@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.google.firebase.auth.FirebaseAuth
@@ -22,10 +23,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val getUid = getIntent()
+        var uid = getUid.getStringExtra("uid").toString()
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView!!.layoutManager = LinearLayoutManager(this)
@@ -39,8 +42,6 @@ class MainActivity : AppCompatActivity() {
         dataAdapter = DataAdapter(response_data as ArrayList<DataModel>)
         recyclerView!!.setAdapter(dataAdapter)
         bindingData()
-
-
     }
 
     private fun bindingData() {
@@ -72,9 +73,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        val getUid = getIntent()
+        var uid = getUid.getStringExtra("uid").toString()
+
         when (item?.itemId) {
             R.id.btnAddActivity -> {
                 val intent = Intent(this, CountActivity::class.java)
+                intent.putExtra("uid", uid)
                 startActivity(intent)
             }
             R.id.menu_sign_out -> {
