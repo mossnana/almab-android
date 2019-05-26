@@ -28,8 +28,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val getUid = getIntent()
-        var uid = getUid.getStringExtra("uid").toString()
-
+        if(getUid.getStringExtra("uid") != null) {
+            var uid = getUid.getStringExtra("uid").toString()
+        }
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView!!.layoutManager = LinearLayoutManager(this)
         recyclerView!!.setLayoutManager(GridLayoutManager(this, 1))
@@ -75,7 +76,12 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         val getUid = getIntent()
-        var uid = getUid.getStringExtra("uid").toString()
+        var uid: String
+        if(getUid.getStringExtra("uid") != null) {
+            uid = getUid.getStringExtra("uid").toString()
+        } else {
+            uid = ""
+        }
 
         when (item?.itemId) {
             R.id.btnAddActivity -> {
