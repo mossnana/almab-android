@@ -18,11 +18,16 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         setTitle("Login")
 
+        val debug = Almab()
+        debug.checkUser()
+
         btnLogin.setOnClickListener {
             action_validate()
         }
 
         btnRegister.setOnClickListener {
+            val debug = Almab()
+            debug.checkUser()
             action_register()
         }
     }

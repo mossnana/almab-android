@@ -3,6 +3,8 @@ package com.mossnana.loginactivity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -23,9 +25,41 @@ class MainActivity : AppCompatActivity() {
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
 
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainer, fragment)
+        fragmentTransaction.commit()
+    }
+
+    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {item ->
+        when (item.itemId) {
+            R.id.navigation_home -> {
+                Log.d(TAG, "Home Click")
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_dashboard -> {
+                Log.d(TAG, "Dash Click")
+                replaceFragment(ProfileFragment())
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_notifications -> {
+                Log.d(TAG, "Nav Click")
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val navView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
+
+        navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
+        val debug = Almab()
+        debug.checkUser()
 
         val getUid = getIntent()
         if(getUid.getStringExtra("uid") != null) {
