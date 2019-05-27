@@ -7,9 +7,11 @@ class Almab {
 
     constructor()
 
+    val user = FirebaseAuth.getInstance().currentUser
+
     fun checkUser() {
         val TAG = "Check User"
-        val user = FirebaseAuth.getInstance().currentUser
+
         user?.let {
             // Name, email address, and profile photo Url
             val name = user.displayName
@@ -21,5 +23,10 @@ class Almab {
             Log.d(TAG, "Current Photo: $photoUrl")
             Log.d(TAG, "Current User ID: $uid")
         }
+    }
+
+    fun getUid(): String {
+        val uid = user!!.uid
+        return uid
     }
 }

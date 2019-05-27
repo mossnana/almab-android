@@ -16,9 +16,9 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private val TAG = "MainActivity"
 
     lateinit var recyclerView: RecyclerView
-    private val TAG = "AlmaB"
     private lateinit var response_data: MutableList<DataModel>
     private var dataAdapter: DataAdapter? = null
 
@@ -34,16 +34,20 @@ class MainActivity : AppCompatActivity() {
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                Log.d(TAG, "Home Click")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
                 Log.d(TAG, "Dash Click")
-                replaceFragment(ProfileFragment())
+                val intent = Intent(this, ProfileActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
                 Log.d(TAG, "Nav Click")
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -54,8 +58,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val navView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
 
+        val navView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
         val debug = Almab()
@@ -68,7 +72,6 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView!!.layoutManager = LinearLayoutManager(this)
         recyclerView!!.setLayoutManager(GridLayoutManager(this, 1))
-
 
         firebaseDatabase = FirebaseDatabase.getInstance()
         databaseReference = firebaseDatabase!!.getReference("/matchs")

@@ -48,7 +48,7 @@ class CountActivity : AppCompatActivity() {
         }
 
         pointRight.setOnLongClickListener{
-            var currentPointRight = pointLeft.text.toString().toInt()
+            var currentPointRight = pointRight.text.toString().toInt()
             if(currentPointRight > 0) {
                 pointRight.setText((currentPointRight-1).toString())
             }
