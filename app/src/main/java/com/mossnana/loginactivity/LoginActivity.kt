@@ -18,11 +18,16 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         setTitle("Login")
 
+        val debug = Almab()
+        debug.checkUser()
+
         btnLogin.setOnClickListener {
             action_validate()
         }
 
         btnRegister.setOnClickListener {
+            val debug = Almab()
+            debug.checkUser()
             action_register()
         }
     }
@@ -40,9 +45,10 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener {
                 if (!it.isSuccessful) return@addOnCompleteListener
 
-                Log.d("Login", "Successfully logged in")
+                Log.d("Login", "Successfully logged in ${it.result}")
 
                 val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("uid", it.result?.user?.uid)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
