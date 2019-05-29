@@ -29,6 +29,8 @@ class CountActivity : AppCompatActivity() {
         setContentView(R.layout.activity_count)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
 
+        val getInfo = Almab().getUid()
+
         pointLeft.setOnClickListener {
             var currentPointLeft = pointLeft.text.toString().toInt()
             pointLeft.setText((currentPointLeft+1).toString())
@@ -71,6 +73,7 @@ class CountActivity : AppCompatActivity() {
             var rightTeamName: String = "Team B"
             var rightTeamPlayerA: String = "Player 3"
             var rightTeamPlayerB: String = "Player 4"
+            var createBy: String = getInfo
 
             database = FirebaseDatabase.getInstance().reference
 
@@ -83,7 +86,8 @@ class CountActivity : AppCompatActivity() {
                 rightTeamPoint,
                 rightTeamName,
                 rightTeamPlayerA,
-                rightTeamPlayerB
+                rightTeamPlayerB,
+                createBy
             )
         }
     }
@@ -112,7 +116,7 @@ class CountActivity : AppCompatActivity() {
         return formatted
     }
 
-    private fun writeNewPost(matchId: String, leftTeamPoint: String, leftTeamName: String, leftTeamPlayerA: String, leftTeamPlayerB: String, rightTeamPoint: String, rightTeamName: String, rightTeamPlayerA: String, rightTeamPlayerB: String) {
+    private fun writeNewPost(matchId: String, leftTeamPoint: String, leftTeamName: String, leftTeamPlayerA: String, leftTeamPlayerB: String, rightTeamPoint: String, rightTeamName: String, rightTeamPlayerA: String, rightTeamPlayerB: String, createBy: String) {
         val key = FirebaseDatabase.getInstance().reference.child("matchs").push().key
 
         val matchs = Matchs(
@@ -124,7 +128,8 @@ class CountActivity : AppCompatActivity() {
             rightTeamPoint,
             rightTeamName,
             rightTeamPlayerA,
-            rightTeamPlayerB
+            rightTeamPlayerB,
+            createBy
         )
 
         val postValues = matchs.toMap()

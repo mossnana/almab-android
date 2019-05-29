@@ -1,9 +1,11 @@
 package com.mossnana.loginactivity
 
 import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
@@ -31,9 +33,11 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
+
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {item ->
         when (item.itemId) {
             R.id.navigation_home -> {
+
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
@@ -65,11 +69,7 @@ class MainActivity : AppCompatActivity() {
         val debug = Almab()
         debug.checkUser()
 
-        val getUid = getIntent()
-        if(getUid.getStringExtra("uid") != null) {
-            var uid = getUid.getStringExtra("uid").toString()
-        }
-        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView = findViewById(R.id.recyclerView) as RecyclerView
         recyclerView!!.layoutManager = LinearLayoutManager(this)
         recyclerView!!.setLayoutManager(GridLayoutManager(this, 1))
 
@@ -112,18 +112,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
-        val getUid = getIntent()
-        var uid: String
-        if(getUid.getStringExtra("uid") != null) {
-            uid = getUid.getStringExtra("uid").toString()
-        } else {
-            uid = ""
-        }
-
         when (item?.itemId) {
             R.id.btnAddActivity -> {
                 val intent = Intent(this, CountActivity::class.java)
-                intent.putExtra("uid", uid)
                 startActivity(intent)
             }
             R.id.menu_sign_out -> {

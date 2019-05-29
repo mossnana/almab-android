@@ -42,11 +42,13 @@
                 <TextView
                         android:text="Your Name"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/labelName" android:layout_weight="1"/>
+                        android:layout_height="wrap_content" android:id="@+id/labelName" android:layout_weight="1"
+                        android:gravity="center"/>
                 <TextView
                         android:text="Your Email"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/labeEmail" android:layout_weight="1"/>
+                        android:layout_height="wrap_content" android:id="@+id/labeEmail" android:layout_weight="1"
+                        android:gravity="center"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"
@@ -56,17 +58,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
-                        android:text="Name"
                         android:ems="10"
-                        android:id="@+id/txtName" android:layout_weight="1"/>
+                        android:id="@+id/txtName" android:layout_weight="1" android:gravity="start"/>
                 <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
-                        android:text="Name"
                         android:ems="10"
-                        android:id="@+id/txtEmail" android:layout_weight="1"/>
+                        android:id="@+id/txtEmail" android:layout_weight="1" android:gravity="start"
+                        android:editable="false"/>
             </LinearLayout>
         </LinearLayout>
+        <Button
+                android:text="Edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/btnEdit"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

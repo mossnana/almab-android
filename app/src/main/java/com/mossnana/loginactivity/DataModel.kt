@@ -10,6 +10,7 @@ class DataModel {
     var rightTeamName: String? = null
     var rightTeamPlayerA: String? = null
     var rightTeamPlayerB: String? = null
+    var createBy: String? = null
 
     constructor()
 
@@ -22,7 +23,8 @@ class DataModel {
         rightTeamPoint: String?,
         rightTeamName: String?,
         rightTeamPlayerA: String?,
-        rightTeamPlayerB: String?
+        rightTeamPlayerB: String?,
+        createBy: String?
     ) {
         this.matchId = matchId
         this.leftTeamPoint = leftTeamPoint
@@ -33,6 +35,7 @@ class DataModel {
         this.rightTeamName = rightTeamName
         this.rightTeamPlayerA = rightTeamPlayerA
         this.rightTeamPlayerB = rightTeamPlayerB
+        this.createBy = createBy
     }
 
 
@@ -49,6 +52,7 @@ class DataModel {
         result.put("rightTeamName", rightTeamName!!)
         result.put("rightTeamPlayerA", rightTeamPlayerA!!)
         result.put("rightTeamPlayerB", rightTeamPlayerB!!)
+        result.put("createBy", createBy!!)
         return result
     }
 }

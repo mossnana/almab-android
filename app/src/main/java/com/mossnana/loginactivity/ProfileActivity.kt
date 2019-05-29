@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.util.Log
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -19,14 +21,26 @@ class ProfileActivity : AppCompatActivity() {
 
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
+    private lateinit var database: DatabaseReference
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         val navView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-
         firebaseUser()
+
+        btnEdit.setOnClickListener {
+            val debug = Almab()
+            val uid: String = debug.getUid()
+            var profileName: String = txtName.text.toString()
+            firebaseDatabase = FirebaseDatabase.getInstance()
+            databaseReference = firebaseDatabase!!.getReference("/users/$uid")
+            database = FirebaseDatabase.getInstance().reference
+            database.child("users").child(uid).child("name").setValue(profileName)
+            Toast.makeText(this, "Update Successful", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun firebaseUser(): String {
@@ -76,15 +90,15 @@ class ProfileActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
-                return@OnNavigationItemSelectedListener true
+                return@OnNavigationItemSelectedListener false
             }
             R.id.navigation_dashboard -> {
 
-                return@OnNavigationItemSelectedListener true
+                return@OnNavigationItemSelectedListener false
             }
             R.id.navigation_notifications -> {
 
-                return@OnNavigationItemSelectedListener true
+                return@OnNavigationItemSelectedListener false
             }
         }
         false

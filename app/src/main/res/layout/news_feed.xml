@@ -7,13 +7,22 @@
         android:layout_height="wrap_content" android:id="@+id/layout" android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp" android:layout_marginTop="8dp"
         android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp">
-    <TextView
-            android:text="Match ID"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/line">
+    <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/matchId"
-            android:gravity="bottom|center|center_vertical"
-            android:textSize="18sp" android:textColor="#1E88E5" android:layout_weight="2"/>
+            android:layout_height="match_parent" android:gravity="center"
+    >
+        <ImageView
+                android:layout_width="165dp"
+                android:layout_height="69dp" tools:srcCompat="@tools:sample/avatars"
+                android:id="@+id/profileImage" android:layout_weight="1"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/txtName" android:layout_weight="1"
+                android:gravity="start" android:text="Profile Name"/>
+    </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -55,4 +64,8 @@
                 android:id="@+id/imageTeamRight" android:layout_weight="1"
                 android:background="#02BCD4" app:srcCompat="@mipmap/ic_launcher"/>
     </LinearLayout>
+    <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/matchId"/>
 </LinearLayout>

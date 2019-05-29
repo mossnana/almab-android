@@ -14,7 +14,8 @@ data class Matchs(
     var rightTeamPoint: String? = null,
     var rightTeamName: String? = null,
     var rightTeamPlayerA: String? = null,
-    var rightTeamPlayerB: String? = null
+    var rightTeamPlayerB: String? = null,
+    var createBy: String? = null
 ) {
 
     @Exclude
@@ -28,7 +29,8 @@ data class Matchs(
             "rightTeamPoint" to rightTeamPoint,
             "rightTeamName" to rightTeamName,
             "rightTeamPlayerA" to rightTeamPlayerA,
-            "rightTeamPlayerB" to rightTeamPlayerB
+            "rightTeamPlayerB" to rightTeamPlayerB,
+            "createBy" to createBy
         )
     }
 }
