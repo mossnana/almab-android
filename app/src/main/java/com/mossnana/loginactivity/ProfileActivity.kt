@@ -56,7 +56,6 @@ class ProfileActivity : AppCompatActivity() {
         val database = object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val userInfo = dataSnapshot.getValue(User::class.java)
-                Log.d(TAG, "user pro" + userInfo!!.profileImageUrl)
                 profileUrl = userInfo!!.profileImageUrl.toString()
                 profileName = userInfo!!.name.toString()
                 profileEmail = userInfo!!.username.toString()

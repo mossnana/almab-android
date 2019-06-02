@@ -28,9 +28,9 @@
             app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView" app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintVertical_bias="0.076">
         <ImageView
-                android:layout_width="match_parent"
+                android:layout_width="214dp"
                 android:layout_height="214dp" app:srcCompat="@mipmap/ic_launcher"
-                android:id="@+id/imageView"/>
+                android:id="@+id/imageView" android:layout_gravity="center"/>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"

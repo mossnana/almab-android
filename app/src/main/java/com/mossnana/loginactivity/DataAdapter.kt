@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -40,9 +41,8 @@ class DataAdapter(val dataModelList: List<DataModel>): RecyclerView.Adapter<View
                     .placeholder(R.mipmap.ic_launcher)
                     .into(p0.profileImage)
             }
-
             override fun onCancelled(p0: DatabaseError) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                return
             }
         }
         databaseReference.addValueEventListener(database)

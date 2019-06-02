@@ -2,6 +2,7 @@ package com.mossnana.loginactivity
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -56,10 +57,8 @@ class RegisterActivity : AppCompatActivity() {
 
             selectphoto_imageview_register.setImageBitmap(bitmap)
 
-            selectphoto_button_register.alpha = 0f
-
-//      val bitmapDrawable = BitmapDrawable(bitmap)
-//      selectphoto_button_register.setBackgroundDrawable(bitmapDrawable)
+//            val bitmapDrawable = BitmapDrawable(bitmap)
+//            selectphoto_button_register.setBackgroundDrawable(bitmapDrawable)
         }
     }
 
