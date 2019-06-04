@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -41,16 +42,12 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                Log.d(TAG, "Dash Click")
-                val intent = Intent(this, ProfileActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                val intent = Intent(this, SetInfoActivity::class.java)
                 startActivity(intent)
-                return@OnNavigationItemSelectedListener true
+                return@OnNavigationItemSelectedListener false
             }
             R.id.navigation_notifications -> {
-                Log.d(TAG, "Nav Click")
-                val intent = Intent(this, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                val intent = Intent(this, ProfileActivity::class.java)
                 startActivity(intent)
                 return@OnNavigationItemSelectedListener true
             }
@@ -61,7 +58,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
 
         val navView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)

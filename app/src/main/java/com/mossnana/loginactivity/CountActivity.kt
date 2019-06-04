@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.util.Log
+import android.view.View
 import android.view.Window
 import android.widget.Toast
 import com.google.firebase.database.*
@@ -22,6 +23,41 @@ class CountActivity : AppCompatActivity() {
 
     val TAG = "CountActivity"
 
+    var lastWinner: String = ""
+
+    var serveState: String = ""
+
+    private fun setState(isLeft: Boolean, currentLeftPoint: Int, currentRightPoint: Int) {
+        if(isLeft) {
+            if(currentLeftPoint + currentRightPoint === 0) {
+                serveState = "Player A"
+                TODO("Unfinished")
+            }
+        } else {
+            TODO("Unfinished")
+        }
+    }
+
+    private fun hideSystemUI() {
+        // Enables regular immersive mode.
+        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
+        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE
+                // Set the content to appear under the system bars so that the
+                // content doesn't resize when the system bars hide and show.
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                // Hide the nav bar and status bar
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_FULLSCREEN)
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) hideSystemUI()
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +65,11 @@ class CountActivity : AppCompatActivity() {
         setContentView(R.layout.activity_count)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
 
+        val getIntent = getIntent()
+
         val getInfo = Almab().getUid()
+
+        lastWinner = getIntent().getStringExtra("lastWinner").toString()
 
         pointLeft.setOnClickListener {
             var currentPointLeft = pointLeft.text.toString().toInt()
@@ -66,13 +106,13 @@ class CountActivity : AppCompatActivity() {
         btnSavePoint.setOnClickListener {
             var matchId: String = getTimeStamp()
             var leftTeamPoint: String = pointLeft.text.toString()
-            var leftTeamName: String = "Team A"
-            var leftTeamPlayerA: String = "Player 1"
-            var leftTeamPlayerB: String = "Player 2"
+            var leftTeamName: String = getIntent.getStringExtra("leftTeamName")
+            var leftTeamPlayerA: String = getIntent.getStringExtra("playerA")
+            var leftTeamPlayerB: String = getIntent.getStringExtra("playerB")
             var rightTeamPoint: String = pointRight.text.toString()
-            var rightTeamName: String = "Team B"
-            var rightTeamPlayerA: String = "Player 3"
-            var rightTeamPlayerB: String = "Player 4"
+            var rightTeamName: String = getIntent.getStringExtra("rightTeamName")
+            var rightTeamPlayerA: String = getIntent.getStringExtra("playerC")
+            var rightTeamPlayerB: String = getIntent.getStringExtra("playerD")
             var createBy: String = getInfo
 
             database = FirebaseDatabase.getInstance().reference

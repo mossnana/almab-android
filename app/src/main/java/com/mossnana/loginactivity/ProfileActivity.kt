@@ -89,10 +89,11 @@ class ProfileActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
-                return@OnNavigationItemSelectedListener false
+                return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-
+                val intent = Intent(this, SetInfoActivity::class.java)
+                startActivity(intent)
                 return@OnNavigationItemSelectedListener false
             }
             R.id.navigation_notifications -> {
