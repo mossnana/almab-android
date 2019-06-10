@@ -27,16 +27,13 @@ class CountActivity : AppCompatActivity() {
 
     var serveState: String = ""
 
-    private fun setState(isLeft: Boolean, currentLeftPoint: Int, currentRightPoint: Int) {
-        if(isLeft) {
-            if(currentLeftPoint + currentRightPoint === 0) {
-                serveState = "Player A"
-                TODO("Unfinished")
-            }
-        } else {
-            TODO("Unfinished")
-        }
-    }
+    var currentPointLeft: Int = 0
+    var currentPointRight: Int = 0
+
+    var playerAinLeft: String = ""
+    var playerBinLeft: String = ""
+    var playerAinRight: String = ""
+    var playerBinRight: String = ""
 
     private fun hideSystemUI() {
         // Enables regular immersive mode.
@@ -69,31 +66,44 @@ class CountActivity : AppCompatActivity() {
 
         val getInfo = Almab().getUid()
 
+        playerAinLeft = getIntent().getStringExtra("playerA").toString()
+        playerBinLeft = getIntent().getStringExtra("playerB").toString()
+        playerAinRight = getIntent().getStringExtra("playerC").toString()
+        playerBinRight = getIntent().getStringExtra("playerD").toString()
+
         lastWinner = getIntent().getStringExtra("lastWinner").toString()
 
         pointLeft.setOnClickListener {
-            var currentPointLeft = pointLeft.text.toString().toInt()
+            currentPointLeft = pointLeft.text.toString().toInt()
             pointLeft.setText((currentPointLeft+1).toString())
+            setState(true, currentPointLeft, currentPointRight)
+            Toast.makeText(this, "Next Serve: ${serveState}", Toast.LENGTH_SHORT).show()
         }
 
         pointLeft.setOnLongClickListener{
-            var currentPointLeft = pointLeft.text.toString().toInt()
+            currentPointLeft = pointLeft.text.toString().toInt()
             if(currentPointLeft > 0) {
                 pointLeft.setText((currentPointLeft-1).toString())
             }
+            setState(false, currentPointLeft, currentPointRight)
+            Toast.makeText(this, "Next Serve: ${serveState}", Toast.LENGTH_SHORT).show()
             return@setOnLongClickListener true
         }
 
         pointRight.setOnClickListener {
-            var currentPointRight = pointRight.text.toString().toInt()
+            currentPointRight = pointRight.text.toString().toInt()
             pointRight.setText((currentPointRight+1).toString())
+            setState(false, currentPointLeft, currentPointRight)
+            Toast.makeText(this, "Next Serve: ${serveState}", Toast.LENGTH_SHORT).show()
         }
 
         pointRight.setOnLongClickListener{
-            var currentPointRight = pointRight.text.toString().toInt()
+            currentPointRight = pointRight.text.toString().toInt()
             if(currentPointRight > 0) {
-                pointRight.setText((currentPointRight-1).toString())
+                pointRight.setText((currentPointRight - 1).toString())
             }
+            setState(true, currentPointLeft, currentPointRight)
+            Toast.makeText(this, "Next Serve: ${serveState}", Toast.LENGTH_SHORT).show()
             return@setOnLongClickListener true
         }
 
@@ -101,6 +111,7 @@ class CountActivity : AppCompatActivity() {
             val resetScore: Int = 0
             pointLeft.setText((resetScore).toString())
             pointRight.setText((resetScore).toString())
+            Toast.makeText(this, "Scores had reset.", Toast.LENGTH_SHORT).show()
         }
 
         btnSavePoint.setOnClickListener {
@@ -186,4 +197,43 @@ class CountActivity : AppCompatActivity() {
                 Toast.makeText(this, "Failed to Submit Point", Toast.LENGTH_SHORT).show()
             }
     }
+
+    fun setState(isLeft: Boolean, clp: Int, crp: Int) {
+        if(isLeft) {
+            if(clp + crp !== 0) {
+                if(clp % 2 === 0) {
+                    serveState = playerBinLeft
+                    lastWinner = "left"
+                    return@setState
+                } else {
+                    serveState = playerAinLeft
+                    lastWinner = "left"
+                    return@setState
+                }
+            } else {
+                if(lastWinner === "left") {
+                    serveState = playerBinLeft
+                    return@setState
+                }
+            }
+        } else {
+            if(clp + crp !== 0) {
+                if(crp % 2 === 0) {
+                    serveState = playerAinRight
+                    lastWinner = "right"
+                    return@setState
+                } else {
+                    serveState = playerBinRight
+                    lastWinner = "right"
+                    return@setState
+                }
+            } else {
+                if(lastWinner === "right") {
+                    serveState = playerAinRight
+                    return@setState
+                }
+            }
+        }
+    }
 }
+
