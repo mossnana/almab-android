@@ -60,7 +60,8 @@
                     android:id="@+id/btnLogin"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_gravity="center" android:background="@color/white" android:layout_margin="10dp"
+                    android:layout_gravity="center" android:background="@drawable/button_bg"
+                    android:layout_margin="10dp"
                     android:radius="50dp"/>
         </LinearLayout>
         <Button
