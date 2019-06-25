@@ -5,10 +5,9 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" android:id="@+id/layout" android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp" android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/line">
+        android:layout_marginStart="8dp"
+        android:background="@drawable/line" android:layout_marginTop="0dp" android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp" android:layout_marginBottom="0dp" android:layout_margin="2dp">
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -16,12 +15,13 @@
     >
         <ImageView
                 android:layout_width="165dp"
-                android:layout_height="69dp" tools:srcCompat="@tools:sample/avatars"
-                android:id="@+id/profileImage" android:layout_weight="1"/>
+                android:layout_height="80dp" tools:srcCompat="@tools:sample/avatars"
+                android:id="@+id/profileImage" android:layout_weight="1" android:scaleType="centerCrop"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/txtName" android:layout_weight="1"
-                android:gravity="start" android:text="Profile Name"/>
+                android:gravity="center" android:text="Profile Name" android:layout_gravity="center"
+                android:textSize="18sp" android:textStyle="bold"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
@@ -30,12 +30,13 @@
         <TextView
                 android:text="Left Team Name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/leftTeamName" android:layout_weight="1"/>
+                android:layout_height="wrap_content" android:id="@+id/leftTeamName" android:layout_weight="1"
+                android:textSize="18sp" android:textColor="#E92064" android:gravity="center" android:padding="5dp"/>
         <TextView
                 android:text="Right Team Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/rightTeamName" android:layout_weight="1"
-                android:gravity="right"/>
+                android:gravity="center" android:textSize="18sp" android:textColor="#02BCD4" android:padding="5dp"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
@@ -67,5 +68,5 @@
     <TextView
             android:text="TextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/matchId"/>
+            android:layout_height="wrap_content" android:id="@+id/matchId" android:gravity="end"/>
 </LinearLayout>
