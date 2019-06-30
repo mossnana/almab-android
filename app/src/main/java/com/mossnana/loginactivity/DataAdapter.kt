@@ -11,8 +11,10 @@ import android.widget.Toast
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.android.synthetic.main.news_feed.view.*
 
 class DataAdapter(val dataModelList: List<DataModel>): RecyclerView.Adapter<ViewHolder>() {
+    val TAG: String = "DataAdapter"
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
@@ -25,13 +27,11 @@ class DataAdapter(val dataModelList: List<DataModel>): RecyclerView.Adapter<View
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         val dataModel = dataModelList[p1]
-
         val createUser = dataModel.createBy
         var profileUrl: String = ""
-        var profileName: String = ""
         firebaseDatabase = FirebaseDatabase.getInstance()
         databaseReference = firebaseDatabase!!.getReference("/users/$createUser")
-        val database = object: ValueEventListener {
+        val database = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val userInfo = dataSnapshot.getValue(User::class.java)
                 profileUrl = userInfo!!.profileImageUrl.toString()
@@ -41,6 +41,7 @@ class DataAdapter(val dataModelList: List<DataModel>): RecyclerView.Adapter<View
                     .placeholder(R.mipmap.ic_launcher)
                     .into(p0.profileImage)
             }
+
             override fun onCancelled(p0: DatabaseError) {
                 return
             }
@@ -57,7 +58,7 @@ class DataAdapter(val dataModelList: List<DataModel>): RecyclerView.Adapter<View
         var teamLeftPoint = dataModel.leftTeamPoint.toString().toInt()
         var teamRightPoint = dataModel.rightTeamPoint.toString().toInt()
 
-        if(teamLeftPoint > teamRightPoint) {
+        if (teamLeftPoint > teamRightPoint) {
             Picasso.get().load("https://i.imgur.com/jCGbLaf.png")
                 .error(R.mipmap.ic_launcher)
                 .placeholder(R.mipmap.ic_launcher)
@@ -87,6 +88,9 @@ class DataAdapter(val dataModelList: List<DataModel>): RecyclerView.Adapter<View
                 .error(R.mipmap.ic_launcher)
                 .placeholder(R.mipmap.ic_launcher)
                 .into(p0.imageTeamRight)
+        }
+        p0.itemView.layout.setOnClickListener {
+            Log.d("DA", dataModel.createBy)
         }
     }
 }

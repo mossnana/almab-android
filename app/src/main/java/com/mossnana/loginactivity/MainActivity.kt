@@ -19,7 +19,6 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private val TAG = "MainActivity"
 
     lateinit var recyclerView: RecyclerView
     private lateinit var response_data: MutableList<DataModel>
@@ -28,17 +27,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
 
-    private fun replaceFragment(fragment: Fragment) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment)
-        fragmentTransaction.commit()
-    }
-
-
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
@@ -81,10 +72,8 @@ class MainActivity : AppCompatActivity() {
     private fun bindingData() {
         databaseReference!!.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(dataSnapshot: DataSnapshot, s: String?) {
-
                 response_data!!.add(dataSnapshot.getValue(DataModel::class.java)!!)
                 dataAdapter!!.notifyDataSetChanged()
-
             }
 
             override fun onChildChanged(dataSnapshot: DataSnapshot, s: String?) {
@@ -107,7 +96,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-
         when (item?.itemId) {
             R.id.btnAddActivity -> {
                 val intent = Intent(this, CountActivity::class.java)
