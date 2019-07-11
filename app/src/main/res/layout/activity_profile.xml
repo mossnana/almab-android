@@ -30,48 +30,56 @@
         <ImageView
                 android:layout_width="214dp"
                 android:layout_height="214dp" app:srcCompat="@mipmap/ic_launcher"
-                android:id="@+id/imageView" android:layout_gravity="center"/>
+                android:id="@+id/imageView" android:layout_gravity="center" android:layout_margin="10dp"/>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content" android:padding="0dp" android:layout_margin="10dp">
             <LinearLayout
                     android:orientation="vertical"
-                    android:layout_width="match_parent"
+                    android:layout_width="181dp"
                     android:layout_height="match_parent" android:layout_weight="1">
                 <TextView
-                        android:text="Your Name"
+                        android:text="Name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/labelName" android:layout_weight="1"
-                        android:gravity="center"/>
+                        android:gravity="center" android:textSize="18sp"/>
                 <TextView
-                        android:text="Your Email"
-                        android:layout_width="match_parent"
+                        android:text="@string/prompt_email"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content" android:id="@+id/labeEmail" android:layout_weight="1"
-                        android:gravity="center"/>
+                        android:gravity="center" android:textSize="18dp"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:layout_weight="1">
                 <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
+                        android:inputType="textShortMessage|textCapWords"
                         android:ems="10"
-                        android:id="@+id/txtName" android:layout_weight="1" android:gravity="start"/>
+                        android:id="@+id/txtName" android:gravity="start"/>
                 <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
+                        android:inputType="textWebEmailAddress"
                         android:ems="10"
                         android:id="@+id/txtEmail" android:layout_weight="1" android:gravity="start"
-                        android:editable="false"/>
+                        android:editable="false" android:autofillHints=""/>
             </LinearLayout>
         </LinearLayout>
         <Button
                 android:text="Edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/btnEdit"/>
+                android:layout_width="250dp"
+                android:layout_height="wrap_content" android:id="@+id/btnEdit" android:padding="10dp"
+                android:layout_margin="10dp" android:textColor="#FFFFFF" android:background="#00E676"
+                android:textSize="25sp" android:layout_gravity="center"/>
+        <Button
+                android:text="Logout"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content" android:id="@+id/btnLogout" android:gravity="center"
+                android:layout_gravity="center" android:background="#FAFAFA" android:textColor="#FF1744"
+                android:textSize="24sp"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

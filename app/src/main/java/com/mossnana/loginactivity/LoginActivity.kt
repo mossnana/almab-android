@@ -11,8 +11,6 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
-    private val TAG = "LoginActivity"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -35,7 +33,6 @@ class LoginActivity : AppCompatActivity() {
     private fun action_validate() {
         val email = txtUsername.text.toString()
         val password = txtPassword.text.toString()
-        var databaseReference = FirebaseDatabase.getInstance().reference
 
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please Enter your Email and Password !!!", Toast.LENGTH_SHORT).show()
@@ -44,9 +41,6 @@ class LoginActivity : AppCompatActivity() {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (!it.isSuccessful) return@addOnCompleteListener
-
-                Log.d("Login", "Successfully logged in ${it.result}")
-
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("uid", it.result?.user?.uid)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -60,7 +54,6 @@ class LoginActivity : AppCompatActivity() {
     private fun action_register() {
         val email = txtUsername.text.toString()
         val intent = Intent(this, RegisterActivity::class.java)
-
         intent.putExtra("email",email)
         startActivity(intent)
     }

@@ -20,16 +20,11 @@ import java.time.format.DateTimeFormatter
 class CountActivity : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
-
     val TAG = "CountActivity"
-
     var lastWinner: String = ""
-
     var serveState: String = ""
-
     var currentPointLeft: Int = 0
     var currentPointRight: Int = 0
-
     var playerAinLeft: String = ""
     var playerBinLeft: String = ""
     var playerAinRight: String = ""
@@ -63,14 +58,12 @@ class CountActivity : AppCompatActivity() {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
 
         val getIntent = getIntent()
-
         val getInfo = Almab().getUid()
 
         playerAinLeft = getIntent().getStringExtra("playerA").toString()
         playerBinLeft = getIntent().getStringExtra("playerB").toString()
         playerAinRight = getIntent().getStringExtra("playerC").toString()
         playerBinRight = getIntent().getStringExtra("playerD").toString()
-
         lastWinner = getIntent().getStringExtra("lastWinner").toString()
 
         pointLeft.setOnClickListener {
@@ -143,22 +136,6 @@ class CountActivity : AppCompatActivity() {
         }
     }
 
-    fun hash(): String {
-        val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-        val text = (1..32)
-            .map { i -> kotlin.random.Random.nextInt(0, charPool.size) }
-            .map(charPool::get)
-            .joinToString("");
-        val bytes = text.toByteArray()
-        val md = MessageDigest.getInstance("SHA-256")
-        val digest = md.digest(bytes)
-        var sha256: String = ""
-        for (byte in digest){
-            sha256 += "%02x".format(byte).toString()
-        }
-        return sha256
-    }
-
     @RequiresApi(Build.VERSION_CODES.O)
     fun getTimeStamp(): String {
         val current = LocalDateTime.now()
@@ -169,7 +146,6 @@ class CountActivity : AppCompatActivity() {
 
     private fun writeNewPost(matchId: String, leftTeamPoint: String, leftTeamName: String, leftTeamPlayerA: String, leftTeamPlayerB: String, rightTeamPoint: String, rightTeamName: String, rightTeamPlayerA: String, rightTeamPlayerB: String, createBy: String) {
         val key = FirebaseDatabase.getInstance().reference.child("matchs").push().key
-
         val matchs = Matchs(
             matchId,
             leftTeamPoint,
@@ -182,9 +158,7 @@ class CountActivity : AppCompatActivity() {
             rightTeamPlayerB,
             createBy
         )
-
         val postValues = matchs.toMap()
-
         val childUpdates = HashMap<String, Any>()
         childUpdates["/matchs/$key"] = postValues
         FirebaseDatabase.getInstance().reference.updateChildren(childUpdates)

@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.news_feed.view.*
 
 class DataAdapter(val dataModelList: List<DataModel>): RecyclerView.Adapter<ViewHolder>() {
-    val TAG: String = "DataAdapter"
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
@@ -89,9 +88,6 @@ class DataAdapter(val dataModelList: List<DataModel>): RecyclerView.Adapter<View
                 .placeholder(R.mipmap.ic_launcher)
                 .into(p0.imageTeamRight)
         }
-        p0.itemView.layout.setOnClickListener {
-            Log.d("DA", dataModel.createBy)
-        }
     }
 }
 
@@ -105,7 +101,6 @@ class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var imageTeamRight: ImageView
     var profileImage: ImageView
     var createBy: TextView = itemView.findViewById(R.id.txtName)
-
     init {
         imageTeamLeft = itemView.findViewById(R.id.imageTeamLeft)
         imageTeamRight = itemView.findViewById(R.id.imageTeamRight)

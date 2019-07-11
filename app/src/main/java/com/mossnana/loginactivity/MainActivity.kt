@@ -1,29 +1,22 @@
 package com.mossnana.loginactivity
 
 import android.content.Intent
-import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var recyclerView: RecyclerView
     private lateinit var response_data: MutableList<DataModel>
     private var dataAdapter: DataAdapter? = null
-
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
 
@@ -51,19 +44,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val navView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
-        navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-
         val debug = Almab()
+        navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         debug.checkUser()
 
         recyclerView = findViewById(R.id.recyclerView) as RecyclerView
         recyclerView!!.layoutManager = LinearLayoutManager(this)
         recyclerView!!.setLayoutManager(GridLayoutManager(this, 1))
-
         firebaseDatabase = FirebaseDatabase.getInstance()
         databaseReference = firebaseDatabase!!.getReference("/matchs")
         response_data = mutableListOf()
-
         dataAdapter = DataAdapter(response_data as ArrayList<DataModel>)
         recyclerView!!.setAdapter(dataAdapter)
         bindingData()
